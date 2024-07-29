@@ -1,0 +1,16 @@
+{extends "base.html" %}
+
+{% block title %} Bad Request {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row my-5 py-5">
+        <div class="col text-center mt-3">
+            <h2>400 <br> Bad Request</h2>
+            <hr>
+            <p>It looks like you've submitted a request that is not valid.</p>
+
+            <a class="btn btn-primary" href="{% url 'home_page' %}">Return to Home Page</a>
+        </div>
+    </div>
+    {% endblock %}

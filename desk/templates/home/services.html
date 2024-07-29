@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container page-top">
+  <div class="row text-center">
+    <h2 class="col-12 mt-5">EXPLORE OUR SPACES</h2>
+  </div>
+</div>
+
+<!-- Services Type Section-->
+<section class="container">
+  {% for service in services %}
+  {% if not forloop.counter|divisibleby:2 %}
+  <div class="row g-3">
+    <div class="mt-5 col-lg-6 col-xl-6">
+      <div class="col">
+        {% if 'placeholder' in service.featured_image.url %}
+        <img loading="lazy" src="https://res.cloudinary.com/dep46gq6m/image/upload/v1678958093/office-desk_bwtoie.jpg"
+          width="600" height="400" class="img-fluid" alt="Default Image">
+        {% else %}
+        <img src="{{ service.featured_image.url }}" class="img-fluid" alt="{{ service.space_type }}" width="600"
+          height="400">
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mt-5 col-lg-6 col-xl-6">
+      <h3 class="text-uppercase mb-4">
+        {{ service.space_type }}
+      </h3>
+      <p>{{ service.content }}</p>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="row g-3 mt-5">
+    <div class="mt-5 col-lg-6 col-xl-6">
+      <h3 class="text-uppercase mb-4">
+        {{ service.space_type }}
+      </h3>
+      <p>{{ service.content }}</p>
+    </div>
+
+    <div class="mt-5 col-lg-6 col-xl-6">
+      <div class="col mb-4">
+        {% if 'placeholder' in service.featured_image.url %}
+        <img loading="lazy" src="https://res.cloudinary.com/dep46gq6m/image/upload/v1678958093/office-desk_bwtoie.jpg"
+          width="600" height="400" class="img-fluid" alt="Default Image">
+        {% else %}
+        <img loading="lazy" src="{{ service.featured_image.url }}" class="img-fluid" alt="{{ service.space_type }}"
+          width="600" height="400">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</section>
+
+<!-- Featured facilities section -->
+<section class="container">
+  <div class="row text-center">
+    <h3 class="col-12 mt-5">FACILITIES & BENEFITS</h3>
+  </div>
+
+  <div class="row g-3 text-center">
+    <div class="col-md-6">
+      <div class="p-2 border-bottom border-primary"> IT Support</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2 border-bottom border-primary">High Speed Wifi</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2  border-bottom border-primary">Printing & Photocopying</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2  border-bottom border-primary">Onsite Gym</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2  border-bottom border-primary">Kitchen Area - Tea, Coffee & Buscuits</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2  border-bottom border-primary">Disable Access</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2 border-bottom border-primary">Toilete & Changing Rooms</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2  border-bottom border-primary">Cleaning & Maintenance</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2 border-bottom border-primary">Lifts</div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-2 border-bottom border-primary">Onsite Nursery</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

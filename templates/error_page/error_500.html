@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} Internal Server Error {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row my-5 py-5">
+        <div class="col text-center mt-3">
+            <h2>500 <br> </b>Server Error</h2>
+            <hr>
+            <p>Oops, something went wrong on our end. Please try refresh the page, Or 
+            <a class="btn btn-primary" href="{% url 'home_page' %}">Return to Home Page</a>
+        </div>
+    </div>
+{% endblock %}

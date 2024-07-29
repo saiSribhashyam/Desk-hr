@@ -1,0 +1,200 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Desk HQ is an Office Space Booking with Varying List of Capacities.">
+  <meta name="keyword"
+    content="Office, Space, Services, WorkSpace, Desk, DeskSpace, Cowork Space, Office Rooms, Conference Room, Booking">
+
+  <title>Desk HQ</title>
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+
+  <!--Bootstrap css CDN Links-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+   <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+</head>
+
+<body class="d-flex flex-column">
+  <header id="header" class="fixed-top shadow mb-5 bg-body rounded">
+    <div class="container-fluid d-flex justify-content-between bg-light navbar-expand-lg">
+
+      <h1 class="my-auto">
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <img src="https://res.cloudinary.com/dep46gq6m/image/upload/v1681749635/desk-hq-logo_dif4vy.webp" alt="Logo"
+            width="32" height="32">
+          <span class="fs-3 brand-name text-uppercase">Desk HQ</span>
+        </a>
+      </h1>
+      <!-- Navigation -->
+      <nav class=" navbar">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              {% if user.is_authenticated %}
+              <h2 class="offcanvas-title logo" id="offcanvasNavbarLabel">
+                {{user.username}}
+              </h2>
+              {% else %}
+              <h2 class="offcanvas-title logo" id="offcanvasNavbarLabel">
+                DESK HQ
+              </h2>
+              {% endif %}
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>
+                {% if user.is_authenticated %}
+
+                <li class="nav-item">
+                  <a class="nav-link booking-highlight" href="{% url 'booking_details' %}">Booking Details</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!--Messages-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          {% for message in messages %}
+          <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+            {{ message | safe }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-top">
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class=" container-fluid bg-footer mt-5 text-center">
+    <div class="row mt-3">
+      <div class="col-12 col-md-4">
+        <h4><a class="navbar-brand" href="{% url 'home' %}">DESK HQ</a></h4>
+          <div class="mb-2">Office Locations London:</div>
+          <div><small>South East London</small></div>
+          <div><small>East London</small></div>
+          <p class="site-use"><small>This site is not intended for commercial use</small></p>
+      </div>
+      <div class="col-12 col-md-4 mb-3">
+        <h4 class="mb-2"><u>Contact Us</u></h4>
+          <div>
+            <small>
+              <span><i class="fa-solid fa-phone me-4"></i></span>
+              <span> 020 1234 5678</span>
+            </small>
+          </div>
+          <div>
+            <small>
+              <span><i class="fa-regular fa-envelope me-1"></i></span>
+              <span>book@deskhq.com</span>
+            </small>
+          </div>
+      </div>
+      <div class="col-12 col-md-4 my-1">
+        <h4 class="mb-3">DESK HQ socials</h4>
+        <div class="social-links mb-5">
+          <a href="https://facebook.com" target="_blank" rel="noopener"
+            aria-label="visit our Face book page (opens in a new tab)"><i class="fab fa-facebook-square ms-3"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener"
+            aria-label="visit our Twitter page (page opens in a new tab)"><i class="fab fa-twitter-square ms-3"></i></a>
+
+          <a href="https://www.linkedin.com/in/rashidat-adekoya-668843245/" target="_blank" rel="noopener"
+            aria-label="visit my Rashidat's Linkedin page (opens in a new tab)">
+            <i class="fa-brands fa-linkedin ms-3"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"
+            aria-label="visit our Instagram page (page opens in a new tab)"><i class="fab fa-instagram ms-3"></i></a>
+        </div>
+        <div class="d-inline git-link social-links">
+          <a href="https://github.com/Shida18719" target="_blank" rel="noopener"
+            aria-label="visit Shida18719's Github page (opens in a new tab)">
+            ©<span id="current-year" class="me-1"></span>
+              <span>Project by Rashidat</span>
+              <i class="fab fa-github-square ms-3"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- /End Footer -->
+
+  <!-- Back to top button -->
+  <button class="btn btn-sm btn-primary rounded-square position-fixed bottom-0 end-0 translate-middle d-none"
+    onclick="scrollToTop()" id="back-to-up" aria-label="Back To Top">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+  </button>
+  <!-- /End Back to top button -->
+
+  <!--Bootstrap JS CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+  </script>
+
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/2d736759eb.js" crossorigin="anonymous"></script>
+
+
+  {% block javascript %}
+  {% endblock javascript %}
+
+
+  <!-- When user clicks on the button, scroll to the top of the page with scroll behavior of smooth. -->
+  <script>
+  function scrollToTop(){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  </script>
+
+  <!-- JAVASCRIPT -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

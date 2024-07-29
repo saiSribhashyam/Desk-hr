@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="hero-container">
+    <div class="hero-image3 d-block w-100"></div>
+    <!-- hero content-->
+    <div class="row">
+        <div class="col-12 col-md-8 text-center mx-auto image-txt2">
+            <h2 class="hero-text mb-5">OUR STORY</h2>
+            <a href="{% url 'home' %}#contact-us" class="btn btn-lg btn-bookspace" aria-label="Go To Home Page">Contact
+                Us
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--About section-->
+<section class="container">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h3>About Us</h3>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-md-12">
+            <div class="my-3 fs-4">
+                <p>
+                    Welcome to DESK HQ office booking space, where we provide flexible and affordable workspace
+                    solutions for individuals and companies.
+                    <br>
+                    We understand the challenges that come with finding the perfect workspace. Whether it's a
+                    lack of funds to commit to a long-term lease, the need for multiple locations, or simply the
+                    desire for a more flexible workspace solution, we have the answer for you.
+                </p>
+                <p>
+                    DESK HQ offers a range of amenities and services that cater to the needs of
+                    modern businesses. From high-speed internet and printing services to conference rooms and
+                    kitchen facilities, our goal is to provide you with a professional and efficient workspace
+                    that meets your needs.
+                </p>
+                <p>
+                    We are dedicated to providing a comfortable and welcoming environment that fosters
+                    collaboration and networking opportunities. Our office space is designed to create a sense
+                    of community, where individuals and companies can connect and share ideas with like-minded
+                    professionals.
+                </p>
+                <p>
+                    Here at DESK HQ, we believe that the key to success is flexibility. We offer a
+                    range of plans and options to suit your needs, from short-term rentals to long-term leases.
+                    We understand that your business needs may change over time, and we are committed to working
+                    with you to find a solution that fits your unique requirements.
+                    <br>
+                    Thank you for considering our office booking space for your workspace needs. We look forward
+                    to welcoming you to our community and providing you with a professional and flexible
+                    workspace solution that will help you achieve your business goals.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

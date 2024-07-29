@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Log Out" %}{% endblock %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container form-page">
+  <div class="row">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto mt-md-4 mt-lg-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8 mt-3 offset-md-2 text-center">
+                <h2>{% trans "Log Out" %}</h2>
+                <p>{% trans 'Are you sure you want to log out?' %}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 mt-3 offset-md-2">
+              <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-signup right"  type="submit">{% trans 'Log Out' %}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

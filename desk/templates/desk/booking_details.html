@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="booking-details page-top">
+    <div class="row">
+        <div class="col-md-8 mb-3 offset-md-2 mt-lg-5">
+            <h2 class="text-center">BOOKING DETAILS</h2>
+        </div>
+    </div>
+    {% for booking in bookings %}
+    <div class="col-md-8 mx-auto mt-md-3 mt-lg-4 mt-4">
+        <div class="container booking-details-card card shadow my-2">
+            <div class="row">
+                <div class="col-12 col-md-8 mt-3">
+                    <ul>
+                        <li><i class="fa-solid fa-location-dot me-2"></i>Location: <strong>
+                                {{booking.location}}</strong>
+                        </li>
+                        <li><i class="fa-solid fa-city me-2"></i>Space Type: <strong> {{booking.space_booking}}</strong>
+                        </li>
+                        <li><i class="fa-solid fa-calendar-days me-2"></i>Booking Date: <strong>
+                                {{booking.booking_date}}</strong>
+                        </li>
+                        <li><i class="fa-regular fa-clock me-2"></i>Duration: <strong>
+                                {{booking.booking_duration}}</strong>
+                        </li>
+                        <li><i class="fa-solid fa-hourglass-start me-2"></i>Booking Starts: <strong>
+                                {{booking.booking_start}}</strong></li>
+                        <li><i class="fa-solid fa-hourglass-end me-2"></i>Booking Ends: <strong>
+                                {{booking.booking_end}}</strong></li>
+                    </ul>
+                    <small>Last updated: {{booking.updated_on}}</small>
+                </div>
+                <div class="col-12 col-md-4 text-center d-md-flex flex-column my-auto">
+                    <a href="{% url 'update_booking' booking.pk %}" class="btn btn-primary btn-sm role='button'">Edit
+                        Booking</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#cancelBooking" aria-label="Cancel Booking">Cancel Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Delete Modal-->
+    <div class="modal" id="cancelBooking" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">CANCEL BOOKING</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel this Booking?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
+                    <a class="btn btn-danger" href="{% url 'cancelBooking' booking.pk %}" role="button"
+                        aria-label="Confirm Cancel Booking">Yes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Delete Modal-->
+
+    <!-- Empty booking details-->
+    {% empty %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-6 mx-auto mt-md-4 mt-lg-2 mt-2">
+                <div class="card shadow  no-booking">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="text-center mt-3">
+                                <p>You do not have any booking details available.</p>
+
+                                <!--Link to Space Booking-->
+                                <div class="d-grid gap-4 col-6 mx-auto mt-5">
+                                    <a href="{% url 'space_booking' %}" class="btn btn-sm btn-bookspace" role="button"
+                                        aria-label="Go To Space Booking Page">Add Booking</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Paginate code from Code Institute-->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+    <!--/Paginator-->
+</div>
+{% endblock %}

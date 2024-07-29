@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container booking-info page-top">
+  <div class="row">
+    <div class="col-12 col-md-8 col-lg-7 mx-auto mt-sm-4 mt-md-5 mt-lg-6 mt-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 mt-3">
+              <h2 class="text-center">BOOK WORKSPACE</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 mt-3 offset-md-2">
+              <form method="POST" action="{% url 'space_booking' %}">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="d-grid gap-2 col-6 col-sm-12 mx-auto">
+                  <button class="btn btn-bookspace" type="submit" aria-label="BOOK WORKSPACE">BOOK WORKSPACE</button>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="my-2"><strong>NOTICE!!!</strong></div>
+                      <p class="fw-light text-muted"><small>Please inform us at the latest 3 hours before the start of your booking of any cancellation, or
+                        arrival later than 20 minutes.
+                        <br>
+                        Thank you for your Understanding.</small>
+                      </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
